@@ -1,0 +1,44 @@
+<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+<style>
+  body {
+    font-family: 'Slabo 27px', serif;
+  }
+  ul { 
+    list-style-type: none; 
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  li { 
+    padding: 0;
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    border: 2px solid #efefef;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>
+
+<body id="app">
+  <p>{{ selection }}</p>
+  <p>Hello {{ message }} and my input is  "{{ searchInput }}"</p>
+  <input v-model="searchInput" debounce="300" v-on:keyup.13="search"> 
+
+  <!-- Part Four -->
+  <!-- {{ giphy }} -->
+
+  <!-- Part Five -->
+  <ul>
+    <li v-for="gif in giphy">
+      <img v-bind:src="gif.images.fixed_height.url" v-on:click="toggleSelection"/>
+    </li>
+  </ul>
+  <script src='script.js' type="text/javascript" charset="utf-8"></script>
+</body>
