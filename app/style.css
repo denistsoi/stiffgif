@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: 'Slabo 27px', serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  padding: 10px;
+  background-color: #efefef;
+  height: 62px;
+  width: 100%;
+}
+
+input {
+  padding: 5px;
+  width: 100%;
+  position: relative;
+  font-size: 24px;
+}
+input:focus {
+  outline: 0;
+}
+
+#content {
+  margin-top: 62px;
+}
+
+.trending { 
+  list-style-type: none; 
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+ul {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+li { 
+  display: block;
+  width: 100%;
+  border: 2px solid #efefef;
+  background-color: #efefef;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}

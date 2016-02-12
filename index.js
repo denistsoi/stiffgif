@@ -8,62 +8,37 @@ mb.app.on('will-quit', function () {
   // globalShortcut.unregisterAll()
 })
 
-// when receive the abort message, close the app
-ipc.on('abort', function () {
-  mb.hideWindow()
-});
-
 mb.on('ready', function ready () {
   // mb.showWindow()
+});
+
+mb.on('after-create-window', function() {
   // mb.window.openDevTools();
 });
 
-/**
- * Part One
- */
-
-// ipc.on('search', function(ev, arg) {
-//   console.log(arg);
-// });
-
 
 /**
- * Part Two
+ * Trending URLS
  */
 
-// var request = require('request');
-// var GIPHY_API_URL = 'http://api.giphy.com/v1/gifs/';
-// var GIPHY_PUBLIC_API_KEY = 'dc6zaTOxFJmzC';
-// var GIPHY_API_KEY = GIPHY_PUBLIC_API_KEY;
+var GIPHY_TRENDING_URL = {
+  url: 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC'
+}
 
-// ipc.on('search', function(ev, arg) {
-//   var query = encodeURIComponent(arg);
-//   console.log(query);
-  
-//   var url = GIPHY_API_URL + 'search?q=' + query + '&api_key=' + GIPHY_API_KEY;
-  
-//   request(url, function(err, response, body) {
-//     console.log(err, response, body)
-//   });
-// });
+var POPKEY_TRENDING_URL = {
+  url: 'https://api.popkey.co/v2/media/curated',
+  header: {
+    'Authorization': "Basic ZGVtbzplYTdiNjZmYjVlNjZjNjJkNmNmYTQ5ZmJlMGYyN2UwMDJjMjUxNGVlZDljNzVlYTlmNjVlOWQ3NTk4Y2I5YTkw"
+  }
+};
 
+var URLS = [POPKEY_TRENDING_URL, GIPHY_TRENDING_URL];
 
-/**
- * Part Three: Render callback to the window.webContents
- */
-
-var request = require('request');
-var GIPHY_API_URL = 'http://api.giphy.com/v1/gifs/';
-var GIPHY_PUBLIC_API_KEY = 'dc6zaTOxFJmzC';
-var GIPHY_API_KEY = GIPHY_PUBLIC_API_KEY;
-
-ipc.on('search', function(ev, arg) {
-  var query = encodeURIComponent(arg);
-
-  var url = GIPHY_API_URL + 'search?q=' + query + '&api_key=' + GIPHY_API_KEY;
-  
-  console.log(url);
-  request(url, function(err, response, body) {
-    mb.window.webContents.send('giphy', body);
+// Trending
+ipc.on('trending', function(ev) {
+  URLS.forEach(function(source) {
+    request(source, function(err, response, body) {
+      mb.window.webContents.send('trending', { source: source.url, body: body });
+    });
   });
 });

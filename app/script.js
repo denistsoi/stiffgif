@@ -1,112 +1,43 @@
 var Vue = require('vue');
 var ipc = require('electron').ipcRenderer;
-
-var searchInput = "";
-
-/**
- * Start
- */
-
-// var app = new Vue({
-//   el: '#app',
-//   data: { 
-//     searchInput: searchInput
-//   }
-// });
-
-
-/**
- * Part One
- */
-
-// var app = new Vue({
-//   el: '#app',
-//   data: { 
-//     searchInput: searchInput
-//   },
-//   methods: {
-//     search: function(ev) {
-//       ipc.send('search', ev.target.value.toString());
-//     }
-//   }
-// });
-
-
-
-/**
- * Part Three
- */
-
-// var app = new Vue({
-//   el: '#app',
-//   data: { 
-//     searchInput: searchInput
-//   },
-//   methods: {
-//     search: function(ev) {
-//       ipc.send('search', ev.target.value.toString());
-//     }
-//   }
-// });
-// ipc.on('giphy', function(event, arg) {
-//   console.log(arg);
-// });
-
-
-
-
-
-/**
- * Part Four
- */
-
-// var app = new Vue({
-//   el: '#app',
-//   data: { 
-//     searchInput: searchInput,
-//     giphy: []
-//   },
-//   methods: {
-//     search: function(ev) {
-//       ipc.send('search', ev.target.value.toString());
-//     }
-//   }
-// });
-
-// ipc.on('giphy', function(event, arg) {
-//   console.log(arg);
-//   app.$set('giphy', arg);
-// });
-
-
-
-
-/**
- * Part Five
- */
-
 var clipboard = require('electron').clipboard;
 
+// Init App
 var app = new Vue({
   el: '#app',
   data: { 
-    searchInput: searchInput,
+    searchInput: '',
+    selection: '',
     giphy: [],
-    selection: ''
+    imgur: [],
+    popkey: [],
+    trending: [],
+    loading: true,
+    scope: ''
   },
   methods: {
-    search: function(ev) {
-      ipc.send('search', ev.target.value.toString());
-    },
     toggleSelection: function(ev) {
       var source = ev.target.src.toString();
       app.$set('selection', source);
       clipboard.writeText(source);
+    },
+    search: function(ev) {
+      var arg = ev.target.value.toString() || this.$data.searchInput;
+      ipc.send('search', arg);
     }
+  },
+  ready: function() {
+    this.$set('scope', 'trending');
+    ipc.send('trending');
   }
 });
 
-ipc.on('giphy', function(event, arg) {
-  var gifs = JSON.parse(arg).data;
-  app.$set('giphy', gifs);
+// only accept giphy and popkey
+ipc.on('trending', function(event, arg) {
+  var gifs = JSON.parse(arg.body);
+  if (arg.source.indexOf('giphy') > -1) { 
+    app.$set('giphy', gifs.data);
+  } else if (arg.source.indexOf('popkey') > -1) {
+    app.$set('popkey', gifs.slice(0,25));
+  } 
 });
