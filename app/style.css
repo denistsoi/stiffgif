@@ -35,21 +35,22 @@ input:focus {
 .trending { 
   list-style-type: none; 
   width: 100%;
+  
+}
+
+ul {
   padding: 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-}
-
-ul {
-  width: 50%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
 li { 
   display: block;
-  width: 100%;
+  width: 50%;
   border: 2px solid #efefef;
   background-color: #efefef;
   max-height: 200px;

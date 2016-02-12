@@ -3,37 +3,14 @@
 
 <body id="app">
   <header>
-    <input v-model="searchInput" debounce="300" v-on:keyup.13="search"> 
-    <!-- <button v-on:click="">fetchmore</button> 
-    <button v-on:click="">trending</button> 
-    giphy {{ giphy.length }}
-    popkey {{ popkey.length }} -->
+    <input v-model="searchInput" debounce="300" @keyup.enter="search">
   </header>
-  <div id="content">
-    
-
-    <!-- <ul>
-      <li v-if="!giphy.length && !loading">
-        <p>No Results Found</p>
+  <div id="content">    
+    <ul class="giphy">
+      <li v-for="gif in giphy" v-on:click="copyToClipboard">
+        <img v-bind:src="gif.images.fixed_height.url" />
       </li>
-      <li v-for="gif in giphy">
-        <img v-bind:src="gif.images.downsized.url" v-on:click="toggleSelection"/>
-      </li> 
-    </ul> -->
-    
-    <div class="trending" v-if="scope === 'trending'">
-      <ul class="giphy">
-        <li v-for="gif in giphy" >
-          <img class="half" v-bind:src="gif.images.fixed_height_small.url" v-on:click="toggleSelection"/>
-        </li>
-      </ul>
-      <ul class="popkey">
-        <li v-for="pop in popkey">
-          <img class="half" v-bind:src="pop.images.small_cropped.gif" v-on:click="toggleSelection"/>
-        </li>
-      </ul>
-    </div>
-
+    </ul>
   </div>
   <script src='script.js' type="text/javascript" charset="utf-8"></script>
 </body>

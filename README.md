@@ -3,7 +3,7 @@
 OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at Hong Kong Web Developers Feb 2016.
 [Presentation](https://docs.google.com/presentation/d/1lrwxRQtAu7Mp_IJeNT5gOAG1TkDcVL-HFejtP4cw0Jo/edit?usp=sharing)
 
-NOTE: Popkey is a bit flakey
+Can only handle first fetch - need to fetch more
 
 ### Changelog
 
@@ -14,12 +14,10 @@ NOTE: Popkey is a bit flakey
 
 API
 - [x] use giphy api
-- [x] use popkey api
 
 USABILITY 
 - [x] save to clipboard
 - [ ] infinite scroll
-- [ ] grid view 
 - [ ] Menus
 - [ ] hotkeys
 - [ ] Multi-Selection
@@ -29,7 +27,6 @@ USABILITY
 IMPROVEMENTS
 - [x] use downsample gifs due to frame rate rendering
 - [ ] Focus on search bar when clicking icon
-<!-- - [x] fetch more using offset (trending and current search) -->
 
 
 v2.0
