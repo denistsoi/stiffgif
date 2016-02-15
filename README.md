@@ -3,9 +3,11 @@
 OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at Hong Kong Web Developers Feb 2016.
 [Presentation](https://docs.google.com/presentation/d/1lrwxRQtAu7Mp_IJeNT5gOAG1TkDcVL-HFejtP4cw0Jo/edit?usp=sharing)
 
-Can only handle first fetch - need to fetch more
-
 ### Changelog
+
+`1.1.0` 
+- Stable Giphy api
+- Infinite Scroll
 
 `1.0.0` 
 - Init Commit
@@ -17,7 +19,7 @@ API
 
 USABILITY 
 - [x] save to clipboard
-- [ ] infinite scroll
+- [x] infinite scroll
 - [ ] Menus
 - [ ] hotkeys
 - [ ] Multi-Selection
@@ -26,7 +28,7 @@ USABILITY
 
 IMPROVEMENTS
 - [x] use downsample gifs due to frame rate rendering
-- [ ] Focus on search bar when clicking icon
+- [x] Focus on search bar when clicking icon
 
 
 v2.0

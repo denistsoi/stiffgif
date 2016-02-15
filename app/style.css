@@ -43,14 +43,14 @@ ul {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  width: 100%;
+  width: 50%;
   margin: 0;
   padding: 0;
 }
 
 li { 
   display: block;
-  width: 50%;
+  width: 100%;
   border: 2px solid #efefef;
   background-color: #efefef;
   max-height: 200px;

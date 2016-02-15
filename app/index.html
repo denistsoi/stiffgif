@@ -3,7 +3,7 @@
 
 <body id="app">
   <header>
-    <input v-model="searchInput" debounce="300" @keyup.enter="search">
+    <input v-model="searchInput" debounce="300" v-on:keyup.13="search">
   </header>
   <div id="content">    
     <ul class="giphy">
@@ -11,6 +11,8 @@
         <img v-bind:src="gif.images.fixed_height.url" />
       </li>
     </ul>
+
   </div>
+  <footer data-scroll-watch></footer>
   <script src='script.js' type="text/javascript" charset="utf-8"></script>
 </body>

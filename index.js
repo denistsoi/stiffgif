@@ -6,7 +6,7 @@ var menubar = require('menubar');
 var ipc  = require('electron').ipcMain;
 var Menu = require('electron').Menu;
 
-var mb = menubar({ dir: __dirname + '/app' });
+var mb = menubar({ dir: __dirname + '/app', preload: true });
 
 mb.app.on('will-quit', function () {
   // globalShortcut.unregisterAll()
@@ -17,7 +17,7 @@ mb.on('ready', function ready () {
 });
 
 mb.on('after-create-window', function() {
-  // mb.window.openDevTools();
+  mb.window.openDevTools();
 });
 
 
@@ -25,7 +25,7 @@ mb.on('after-create-window', function() {
  * Trending URLS
  */
 
-var GIPHY_TRENDING_URL = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC'
+var GIPHY_TRENDING_URL = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 
 ipc.on('trending', function(ev) {
   var url = GIPHY_TRENDING_URL + '&limit=20';
@@ -57,5 +57,24 @@ ipc.on('search', function(ev, queryString) {
 
   request(url, function(err, response, body) {
     mb.window.webContents.send('giphy:search', body);
+  });
+});
+
+/**
+ * Fetch
+ */
+
+ipc.on('fetch', function(ev, arg) {
+  var url;
+  var query = arg.query ? 'search?q=' + encodeURIComponent(arg.query) : '';
+  
+  if (arg.scope === 'search') {
+    url = GIPHY_API_URL + query  + '&offset=' + arg.offset + '&limit=20' + '&api_key=' + GIPHY_API_KEY;
+  } else if (arg.scope === 'trending') {
+    url = GIPHY_TRENDING_URL + '&offset=' + arg.offset + '&limit=20';
+  }
+
+  request(url, function(err, response, body) {
+    mb.window.webContents.send('fetched', body);
   });
 });
