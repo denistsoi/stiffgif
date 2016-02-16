@@ -5,6 +5,7 @@ var menubar = require('menubar');
 // Electron Dependencies
 var ipc  = require('electron').ipcMain;
 var Menu = require('electron').Menu;
+var BrowserWindow = require('electron').BrowserWindow;
 
 var mb = menubar({ dir: __dirname + '/app', preload: true });
 
@@ -16,65 +17,91 @@ mb.on('ready', function ready () {
   // mb.showWindow()
 });
 
-mb.on('after-create-window', function() {
-  mb.window.openDevTools();
+ipc.on('online-status-changed', function(event, status) {
+  if (status === 'offline') {
+    return mb.window.webContents.send('online', false);
+  }
+  
+  mb.window.webContents.send('online', true);
 });
 
+mb.on('after-create-window', function() {
+  // mb.window.openDevTools();
+});
 
 /**
- * Trending URLS
+ * API End Points
  */
-
+var GIPHY_API_URL = 'http://api.giphy.com/v1/gifs/';
+var GIPHY_PUBLIC_API_KEY = 'dc6zaTOxFJmzC';
+var GIPHY_API_KEY = GIPHY_PUBLIC_API_KEY;
 var GIPHY_TRENDING_URL = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
-
-ipc.on('trending', function(ev) {
-  var url = GIPHY_TRENDING_URL + '&limit=20';
-  request(url, function(err, response, body) {
-    mb.window.webContents.send('giphy:trending', body);
-  });
-});
 
 /**
  * Search 
  */
 
-var GIPHY_API_URL = 'http://api.giphy.com/v1/gifs/';
-var GIPHY_PUBLIC_API_KEY = 'dc6zaTOxFJmzC';
-var GIPHY_API_KEY = GIPHY_PUBLIC_API_KEY;
-
-/**
- * GIPHY
- * q - search query term or phrase
- * limit - (optional) number of results to return, maximum 100. Default 25. 
- * offset - (optional) results offset, defaults to 0. 
- * rating - limit results to those rated (y,g, pg, pg-13 or r). 
- * fmt - (optional) return results in html or json format (useful for viewing responses as GIFs to debug/test)
- */
-
 ipc.on('search', function(ev, queryString) {
-  var query = 'search?q=' + encodeURIComponent(queryString) || '';
-  var url = GIPHY_API_URL + query  + '&limit=20' + '&api_key=' + GIPHY_API_KEY;
+  if (!queryString) throw new Error('queryString must be defined', queryString);
+  
+  var query = 'search?q=' + encodeURIComponent(queryString);
+  
+  var giphy_url = GIPHY_API_URL + query + '&limit=6' + '&api_key=' + GIPHY_API_KEY;
+  var popkey_url = {
+    url: 'https://api.popkey.co/v2/media/' + query + '&page_size=6&page=1',
+    headers: {
+      Authorization: process.env.POPKEY_API_KEY
+    }
+  }
 
-  request(url, function(err, response, body) {
-    mb.window.webContents.send('giphy:search', body);
+  request(giphy_url, function(err, response, body) {
+    mb.window.webContents.send('search:giphy', body);
+  });
+
+  request(popkey_url, function(err, response, body) {
+    mb.window.webContents.send('search:popkey', body);
   });
 });
+
 
 /**
  * Fetch
  */
 
-ipc.on('fetch', function(ev, arg) {
-  var url;
+ipc.on('fetch:giphy', function(ev, arg) {
   var query = arg.query ? 'search?q=' + encodeURIComponent(arg.query) : '';
   
   if (arg.scope === 'search') {
-    url = GIPHY_API_URL + query  + '&offset=' + arg.offset + '&limit=20' + '&api_key=' + GIPHY_API_KEY;
+    var giphy_url = GIPHY_API_URL + query  + '&offset=' + arg.offset + '&limit=6' + '&api_key=' + GIPHY_API_KEY;
   } else if (arg.scope === 'trending') {
-    url = GIPHY_TRENDING_URL + '&offset=' + arg.offset + '&limit=20';
+    var giphy_url = GIPHY_TRENDING_URL + '&offset=' + arg.offset + '&limit=6';
   }
 
-  request(url, function(err, response, body) {
-    mb.window.webContents.send('fetched', body);
+  request(giphy_url, function(err, response, body) {
+    mb.window.webContents.send('fetched:giphy', body);
+  });
+});
+
+ipc.on('fetch:popkey', function(ev, arg) {
+  var query = arg.query ? 'search?q=' + encodeURIComponent(arg.query) : '';
+  
+  if (arg.scope === 'search') {
+    var popkey_url = {
+      url: 'https://api.popkey.co/v2/media/' + query + '&page_size=6&page=' + (1+(arg.offset / 6)),
+      headers: {
+        Authorization: process.env.POPKEY_API_KEY || 'Basic ZGVza3RvcDplMjFkZDA3ZDlkNTlkYjEwYmJhOGI2ZjI3YmJjNzU5YmQzY2UwNTFiZjhkYmIwNmU1M2Y2MDg1Y2YxN2U5MDhk'
+      }
+    }
+  } else if (arg.scope === 'trending') {
+    var popkey_url = {
+      url: 'https://api.popkey.co/v2/media/curated?page_size=6&page=' + (1+(arg.offset / 6)),
+      headers: {
+        Authorization: process.env.POPKEY_API_KEY || 'Basic ZGVza3RvcDplMjFkZDA3ZDlkNTlkYjEwYmJhOGI2ZjI3YmJjNzU5YmQzY2UwNTFiZjhkYmIwNmU1M2Y2MDg1Y2YxN2U5MDhk'
+      }
+    };
+  }
+
+  request(popkey_url, function(err, response, body) {
+    mb.window.webContents.send('fetched:popkey', body);
   });
 });
