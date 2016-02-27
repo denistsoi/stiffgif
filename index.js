@@ -1,17 +1,20 @@
 // Module Dependencies
 var request = require('request');
 var menubar = require('menubar');
+var path    = require('path');
 
 // Electron Dependencies
 var ipc  = require('electron').ipcMain;
 var Menu = require('electron').Menu;
 var BrowserWindow = require('electron').BrowserWindow;
 
-var mb = menubar({ dir: __dirname + '/app', preload: true });
+
+var mb = menubar({ dir: __dirname + '/app', preload: true, icon: path.join(__dirname, 'rabbit-logo@2x.png') });
 
 mb.app.on('will-quit', function () {
   // globalShortcut.unregisterAll()
 })
+
 
 mb.on('ready', function ready () {
   // mb.showWindow()

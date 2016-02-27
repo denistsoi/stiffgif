@@ -8,6 +8,10 @@ OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at 
 
 ### Changelog
 
+`2.1.0`
+- npm release script (builds osx native app)
+- bundled app icons
+
 `2.0.0`
 - add loading spinner
 - copied url footer
@@ -57,6 +61,16 @@ FUTURE
     cd stiffgif
     npm install 
     npm start
+
+### Build Release
+  
+    npm run release
+
+You'll find the latest release inside the `build` folder
+
+### Author
+
+Denis Tsoi [link](https://www.twitter.com/denistsoi)  
 
 ### License
 
