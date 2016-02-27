@@ -13,11 +13,13 @@
   ],
   "author": "Denis Tsoi",
   "license": "MIT",
-  "devDependencies": {
-    "electron-packager": "^5.2.1",
-    "electron-prebuilt": "^0.36.4",
+  "dependencies": {
     "menubar": "^3.0.0",
     "request": "^2.67.0",
     "vue": "^1.0.16"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.36.4"
   }
 }
