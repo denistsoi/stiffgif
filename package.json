@@ -1,11 +1,10 @@
 {
   "name": "stiffgif",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "release": "electron-packager . StiffGif --platform=darwin --arch=x64 --version=0.36.4 --out=build/ --overwrite --ignore=node_modules/electron-prebuilt,node_modules/electron-packager --icon=rabbit-logo.icns"
+    "start": ""
   },
   "keywords": [
     "Electron",
@@ -13,13 +12,13 @@
   ],
   "author": "Denis Tsoi",
   "license": "MIT",
-  "dependencies": {
-    "menubar": "^3.0.0",
-    "request": "^2.67.0",
-    "vue": "^1.0.16"
-  },
   "devDependencies": {
-    "electron-packager": "^5.2.1",
-    "electron-prebuilt": "^0.36.4"
+    "electron": "^1.4.13",
+    "electron-packager": "^8.4.0"
+  },
+  "dependencies": {
+    "menubar": "^5.2.0",
+    "request": "^2.79.0",
+    "vue": "^2.1.8"
   }
 }

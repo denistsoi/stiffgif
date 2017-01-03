@@ -7,26 +7,11 @@ OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at 
 (https://raw.githubusercontent.com/denistsoi/stiffgif/master/stiffgif.gif)
 
 ### Important
-[You can get the latest release here](https://github.com/denistsoi/stiffgif/releases)
+[You can get the latest release here](https://github.com/denistsoi/stiffgif/releases)  
 
-### Changelog
+## Expect Breaking Changes for "Next" Roadmap
 
-`2.1.0`
-- npm release script (builds osx native app)
-- bundled app icons
-
-`2.0.0`
-- add loading spinner
-- copied url footer
-- use Popkey api
-- stable infinite scroll for giphy and popkey sources
-
-`1.1.0` 
-- Stable Giphy api
-- Infinite Scroll
-
-`1.0.0` 
-- Init Commit
+Please check the CHANGELOG for updates
 
 ### TODO
 
