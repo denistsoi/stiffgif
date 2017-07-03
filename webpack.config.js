@@ -1,13 +1,7 @@
-const path = require('path');
-
 module.exports = {
-
   watch: true,
-
   target: 'electron',
-
   entry: `${__dirname}/src/script.js`,
-
   output: {
     path: __dirname + '/public',
     publicPath: '/build',

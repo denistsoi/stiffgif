@@ -22,9 +22,6 @@ app.on('ready', () => {
   let icon = nativeImage.createFromPath('./icon@5x.png')
   tray = new Tray(icon)
 
-  win = new BrowserWindow(windowSize)
-  win.loadURL(`file://${__dirname}/src/index.html`)
-
   // Add a click handler so that when the user clicks on the menubar icon, it shows
   // our popup window
   tray.on('click', function(event) {
