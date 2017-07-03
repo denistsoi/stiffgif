@@ -7,6 +7,11 @@
 
 <script>
 export default {
-  props: ['online']
+  props: ['online'],
+  data() {
+    return {
+      selection: ''
+    }
+  }
 }
 </script>

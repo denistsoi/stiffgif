@@ -3,7 +3,7 @@
     <header>
       <search-bar></search-bar>
     </header>
-    {{ online }}
+
     <content-list :online="online"></content-list>
 
     <footer>
@@ -18,6 +18,7 @@
   import Notification from './components/Notification'
   
   import {ipcRenderer} from 'electron';
+  import fetch from './helpers/fetch';
 
   export default {
     components: {
@@ -43,9 +44,12 @@
       window.addEventListener('offline', updateOnlineStatus);
 
       updateOnlineStatus();
+
+      fetch();
     }
   }
 </script>
+
 <style lang="scss">
 * {
   box-sizing: border-box;

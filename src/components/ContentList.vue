@@ -1,29 +1,46 @@
 <template>
   <div id="content" v-if="online">
-    <ul class="giphy">
-      <li v-for="gif in giphy" >
-        <img src="../loading_spinner.gif" v-img="gif.images.fixed_height_small.url" v-on:click="copyToClipboard"/>
-      </li>
-      <li v-if="!giphy.length">
-        No Results Returned from Giphy
-      </li>
-    </ul>
-    <ul class="popkey">
-      <li v-for="gif in popkey">
-        <img src="../loading_spinner.gif" v-img="gif.images.small.gif" v-on:click="copyToClipboard"/>
-      </li>
-      <li v-if="!popkey.length">
-        No Results Returned from Popkey
-      </li>
-    </ul>
+    
+    <li v-for="gif in giphy" >
+        {{ gif.images }}
+    </li>
+    <li v-if="!giphy.length">
+      No Results Returned from Giphy
+    </li>
   </div>
 </template>
 
 <script>
+import {ipcRenderer} from 'electron';
+
 export default {
-  props: ['online']
+  props: ['online'],
+  data() {
+    return {
+      giphy: []
+    }
+  },
+  mounted() {
+    let app = this;
+    
+    ipcRenderer.on('fetched:giphy', (ev, res)=> {
+      var gifs = JSON.parse(res).data;
+  
+      if (!gifs.length) {
+        app.$set('giphyIsDone', true);
+        return;
+      }
+
+      gifs.forEach(function(item) {
+        app.$data.giphy.push(item);
+      });
+    });
+  }
 }
+
+
 </script>
+
 <style lang="scss">
 #content {
   

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <input v-model="searchInput" debounce="300" v-on:keyup.13="search">
-  </div>
+  <input v-model="searchInput" debounce="300" v-on:keyup.13="search">
 </template>
 
 <script>
@@ -9,6 +7,17 @@ export default {
   data() {
     return {
       searchInput: ''
+    }
+  },
+  mounted() {
+    let el = this.$el;
+    el.focus();
+  },
+  methods() {
+    return {
+      search: ()=>{
+        return 'hi';
+      }
     }
   }
 }

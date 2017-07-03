@@ -13,50 +13,12 @@ OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at 
 
 Please check the CHANGELOG for updates
 
-### TODO
+## Upgraded to electron 1.4.13
 
-API
-- [x] use giphy api
-
-USABILITY 
-- [x] save to clipboard
-- [x] infinite scroll
-- [ ] Menus
-- [ ] hotkeys
-- [ ] Multi-Selection
-- [ ] Drag and drop
-- [ ] onboarding overlay
-
-IMPROVEMENTS
-- [x] use downsample gifs due to frame rate rendering
-- [x] Focus on search bar when clicking icon
-- [ ] highlight image when copying url
-
-v2.0
-- [x] Use popkey api
-- [ ] try to preload or cache before rendering (vue)
-- [ ] offline cache (can store to localstorage)
-- [ ] use streams (replace request/ipc with hyperquest/ipc-duplex)
-
-FUTURE 
-- [ ] other sources that require OAuth (tumblr, imgur)
-- [ ] other gif sources (9gag)
-- [ ] video to gif (youtube, etc)
-
-### How to use
-
-    git clone git@github.com:denistsoi/stiffgif.git
-    cd stiffgif
-    npm install 
-    npm start
-
-### Build Release
-  
-    npm run release
-
-You'll find the latest release inside the `build` folder
-
-### Author
+    npm install
+    npm run start
+    // another window instance
+    npm run dev
 
 Denis Tsoi [link](https://www.twitter.com/denistsoi)  
 
