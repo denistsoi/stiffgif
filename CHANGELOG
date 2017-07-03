@@ -1,5 +1,9 @@
 ### Changelog
 
+`3.0.0`
+- update to vue 2
+- add babel
+
 `2.1.0`
 - npm release script (builds osx native app)
 - bundled app icons

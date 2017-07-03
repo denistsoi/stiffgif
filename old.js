@@ -108,4 +108,3 @@ ipc.on('fetch:popkey', function(ev, arg) {
     mb.window.webContents.send('fetched:popkey', body);
   });
 });
-Contact GitHub API Training Shop Blog About

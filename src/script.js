@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const Vue = require('vue/dist/vue');
 
 // Init App
@@ -118,3 +119,11 @@ ipc.on('fetched:popkey', function(event, response) {
   });
   app.$set('loading', false);
 });
+=======
+var Vue = require('vue');
+import App from './App.vue';
+
+new Vue({
+  ...App
+}).$mount('#app');
+>>>>>>> ADD: commit work;
