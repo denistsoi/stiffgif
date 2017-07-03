@@ -1,23 +1,26 @@
 <template>
   <div id="content" v-if="online">
-    
-    <li v-for="gif in giphy" >
-        {{ gif.images }}
-    </li>
-    <li v-if="!giphy.length">
-      No Results Returned from Giphy
-    </li>
+    <ul>
+      <li v-for="gif in giphy">
+        <img src='loading-spinner.gif' v-img="gif.images.fixed_height.url" v-on:click="copyToClipboard" />
+      </li>
+
+      <li v-if="!giphy.length">
+        No Results Returned from Giphy
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import {ipcRenderer} from 'electron';
+import {ipcRenderer, clipboard} from 'electron';
 
 export default {
   props: ['online'],
   data() {
     return {
-      giphy: []
+      giphy: [],
+      selection: null
     }
   },
   mounted() {
@@ -35,6 +38,13 @@ export default {
         app.$data.giphy.push(item);
       });
     });
+  },
+  methods: {
+    copyToClipboard: function(ev) {
+      const source = ev.target.src.toString();
+      this.$set(this, 'selection', source);
+      clipboard.writeText(source);
+    }
   }
 }
 
@@ -42,23 +52,18 @@ export default {
 </script>
 
 <style lang="scss">
-#content {
-  
-  display: flex;
-}
-
 ul {
   padding: 0;
   flex-flow: row wrap;
-  justify-content: space-around;
-  width: 50%;
+  flex-direction: row;
+  display: flex;
   margin: 0;
   padding: 0;
 }
 
 li { 
   display: block;
-  width: 100%;
+  width: 50%;
   border: 2px solid #efefef;
   background-color: #efefef;
   max-height: 200px;

@@ -9,12 +9,7 @@
 
 <script>
 export default {
-  props: ['online'],
-  data() {
-    return {
-      selection: ''
-    }
-  },
+  props: ['online', 'selection'],
   created() {
     console.log(this);
   }

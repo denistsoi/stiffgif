@@ -1,14 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-Vue.directive('img', function(url) {
-  var img = new Image();
-  img.src = url;
-
-  img.onload = function() {
-    this.el.src = url;
-    this.el.className = "active"
-  }.bind(this);
+Vue.directive('img', function(el, data) {
+  el.src = data.value;
 });
 
 new Vue({

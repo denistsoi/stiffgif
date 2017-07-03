@@ -4,9 +4,9 @@
       <search-bar></search-bar>
     </header>
 
-    <content-list :online="online"></content-list>
+    <content-list :online="online" :selection="selection"></content-list>
 
-    <notification :online="online"></notification>
+    <notification :online="online" :selection="selection"></notification>
   </div>
 </template>
 
@@ -26,7 +26,8 @@
     },
     data() {
       return {
-        online: false
+        online: false,
+        selection: null
       }
     },
     created() {
@@ -35,7 +36,6 @@
 
       var updateOnlineStatus = () => {
         var set = navigator.onLine ? true : false;
-        console.log('online?', set);
         app.$set(app, 'online', set)
       };
 
