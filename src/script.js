@@ -5,7 +5,6 @@ Vue.directive('img', function(url) {
   var img = new Image();
   img.src = url;
 
-  console.log(url);
   img.onload = function() {
     this.el.src = url;
     this.el.className = "active"

@@ -6,9 +6,7 @@
 
     <content-list :online="online"></content-list>
 
-    <footer>
-      <notification :online="online"></notification>
-    </footer>
+    <notification :online="online"></notification>
   </div>
 </template>
 
@@ -37,6 +35,7 @@
 
       var updateOnlineStatus = () => {
         var set = navigator.onLine ? true : false;
+        console.log('online?', set);
         app.$set(app, 'online', set)
       };
 

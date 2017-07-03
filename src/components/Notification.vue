@@ -1,8 +1,10 @@
 <template>
-  <div v-if="online">
+  <footer>
+    <div v-if="online">
+      <div v-show="selection" transition="selected"><h1>Gif has been copied</h1></div>
+    </div>
     <div v-if="!online"><h1>stiffgif is currently offline</h1></div>
-    <div v-show="selection" transition="selected"><h1>Gif has been copied</h1></div>
-  </div>
+  </footer>
 </template>
 
 <script>
@@ -12,6 +14,9 @@ export default {
     return {
       selection: ''
     }
+  },
+  created() {
+    console.log(this);
   }
 }
 </script>
