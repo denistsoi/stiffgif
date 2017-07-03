@@ -17,7 +17,12 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          }
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -25,9 +30,11 @@ module.exports = {
         query: {
           name: '[name].[ext]?[hash]'
         }
-      }
-    ]
+      },
+
+    ],
   },
+
 
   resolve: {
     alias: {

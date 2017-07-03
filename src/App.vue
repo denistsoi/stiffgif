@@ -46,3 +46,36 @@
     }
   }
 </script>
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+}
+$header-height: 62px;
+
+body {
+  font-family: 'Slabo 27px', serif;
+  margin-top: $header-height;
+}
+header {
+  position: fixed;
+  top: 0;
+  padding: 10px;
+  background-color: #efefef;
+  height: $header-height;
+  width: 100%;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+footer h1 {
+  text-align: center;
+}
+</style>

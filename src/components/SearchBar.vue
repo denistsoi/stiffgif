@@ -13,3 +13,14 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  input {
+    padding: 5px;
+    width: 100%;
+    position: relative;
+    font-size: 24px;
+    &:focus {
+      outline: 0;
+    }
+  }
+</style>
