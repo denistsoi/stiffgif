@@ -8,7 +8,7 @@ export default new Vuex.Store({
     giphy: [],
     loading: false,
     online: false,
-    query: '',
+    queries: [],
     scope: 'trending',
     selection: null
 
@@ -16,7 +16,7 @@ export default new Vuex.Store({
   getters: {
     scope: state => { return state.scope },
     loading: state => { return state.loading },
-    query: state => { return state.query }
+    query: state => { return state.queries.pop() }
   },
   mutations: {
     online (state) { state.online = true },
@@ -28,7 +28,7 @@ export default new Vuex.Store({
       return state.giphy = [];
     },
     query (state, query) {
-      return state.query = query;
+      return state.queries.push(query);
     },
     loading (state, value) { state.loading = value },
     updateTab(state, value) { state.scope = value }

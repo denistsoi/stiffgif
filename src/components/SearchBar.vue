@@ -28,7 +28,6 @@ export default {
       const store = app.$store;
       store.commit('query', query);
       store.commit('updateTab', 'search');
-      store.commit('clearGiphy');
       fetch(this, store.getters.query)
     }
   }

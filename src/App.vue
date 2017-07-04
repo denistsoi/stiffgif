@@ -62,6 +62,9 @@
           store.commit('loading', false);
 
           gifs.forEach(function(item) {
+            item.scope = store.getters.scope;
+            item.query = store.getters.query;
+            
             store.commit('giphy', item);
           });
         }

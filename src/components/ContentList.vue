@@ -1,11 +1,11 @@
 <template>
   <div id="content" v-if="online">
     <ul>
-      <li v-for="gif in giphy">
+      <li v-for="gif in filter(giphy)">
         <img src='loading-spinner.gif' v-img="gif.images.fixed_height.url" v-on:click="copyToClipboard" />
       </li>
 
-      <li v-if="!giphy.length">
+      <li v-if="!filter(giphy).length">
         No Results Returned from Giphy
       </li>
     </ul>
@@ -27,6 +27,12 @@ export default {
       const source = ev.target.src.toString();
       this.$set(this, 'selection', source);
       clipboard.writeText(source);
+    },
+    filter: function() {
+      const store = this.$store
+      return store.state.giphy.filter(gif => {
+        return gif.query === store.getters.query;
+      })
     }
   }
 }
