@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['online', 'selected'],
+  props: ['online', 'selection'],
   created() {
     // console.log(this.$store.state);
   }
