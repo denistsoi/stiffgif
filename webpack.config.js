@@ -4,7 +4,7 @@ module.exports = {
   entry: `${__dirname}/src/script.js`,
   output: {
     path: __dirname + '/public',
-    publicPath: '/build',
+    publicPath: '/',
     filename: 'bundle.js'
   },
 
@@ -26,10 +26,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]?[hash]'
-        }
+        loaders: [
+          'file-loader',
+          'image-webpack-loader'
+        ]
       },
 
     ],

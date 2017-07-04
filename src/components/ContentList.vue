@@ -2,7 +2,7 @@
   <div id="content" v-if="online">
     <ul>
       <li v-for="gif in filter(giphy)">
-        <img src='loading-spinner.gif' v-img="gif.images.fixed_height.url" v-on:click="copyToClipboard" />
+        <img v-bind:src="'loading_spinner.gif'" v-img="gif.images.fixed_height.url" v-on:click="copyToClipboard" />
       </li>
 
       <li v-if="!filter(giphy).length">
