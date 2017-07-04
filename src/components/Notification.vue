@@ -11,7 +11,7 @@
 export default {
   props: ['online', 'selection'],
   created() {
-    console.log(this);
+    // console.log(this.$store.state);
   }
 }
 </script>

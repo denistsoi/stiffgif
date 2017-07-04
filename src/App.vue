@@ -18,28 +18,31 @@
   import {ipcRenderer} from 'electron';
   import fetch from './helpers/fetch';
 
+
   export default {
     components: {
       SearchBar,
       ContentList,
       Notification
     },
-    data() {
-      return {
-        giphy: [],
-        loading: false,
-        online: false,
-        scope: 'trending',
-        selection: null
+    computed: {
+      online() {
+        return this.$store.state.online;
+      },
+      selection() {
+        return this.$store.state.selection;
+      },
+      giphy() {
+        return this.$store.state.giphy;
       }
     },
     created() {
       const ipc = ipcRenderer;
       const app = this;
+      const store = app.$store;
 
-      var updateOnlineStatus = () => {
-        var set = navigator.onLine ? true : false;
-        app.$set(app, 'online', set)
+      const updateOnlineStatus = () => {
+        let set = navigator.onLine ? app.$store.commit('online') : app.$store.commit('offline')
       };
 
       window.addEventListener('online', updateOnlineStatus);
@@ -47,28 +50,31 @@
 
       updateOnlineStatus();
 
-      if (!app.loading) {
+      if (!store.getters.loading) {
         fetch(app);
       }
       
       ipcRenderer.on('fetched:giphy', (ev, res)=> {
-        app.loading = false;
         var gifs = JSON.parse(res).data;
-    
+        
         if (!gifs.length) {
           return;
         }
 
-        gifs.forEach(function(item) {
-          app.$data.giphy.push(item);
-        });
+        if (store.getters.loading) {
+          store.commit('loading', false);
+
+          gifs.forEach(function(item) {
+            store.commit('giphy', item);
+          });
+        }
       });      
      
       window.addEventListener('scroll', function(ev) {
         var scrollYTrigger = 500;
         var scrollY = document.body.scrollTop + window.innerHeight + scrollYTrigger;
         if (document.body.scrollHeight < scrollY) {
-          if (!app.loading) {
+          if (!store.getters.loading) {
             setTimeout(fetch(app), 2000);
           }
         }

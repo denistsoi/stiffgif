@@ -2,16 +2,18 @@ import {ipcRenderer} from 'electron';
 const ipc = ipcRenderer;
 
 export default (app) =>{
-  var offset = app.giphy.length;
-  
-  app.loading = true;
-  
-  switch (app.scope) {
+  const store = app.$store;
+
+  let offset = store.state.giphy.length;
+  let scope  = store.getters.scope;
+
+  store.commit('loading', true);
+  switch (scope) {
     case 'trending':
-      ipc.send('fetch:giphy', { scope: 'trending', offset: offset });
+      ipc.send('fetch:giphy', { scope: scope, offset: offset });
       break;
     case 'search':
-      // ipc.send('fetch:giphy', { scope: 'trending', offset: offset });
+      // ipc.send('fetch:giphy', { scope: scope, query: query, offset: offset });
       break;
 
   }
