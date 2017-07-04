@@ -29,7 +29,7 @@ export default {
       clipboard.writeText(source);
     },
     filter: function() {
-      const store = this.$store
+      const store = this.$store;
       return store.state.giphy.filter(gif => {
         return gif.query === store.getters.query;
       })

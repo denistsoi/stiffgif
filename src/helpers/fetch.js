@@ -9,7 +9,6 @@ export default (app) =>{
   let query  = store.getters.query;
   store.commit('loading', true);
 
-  console.log(scope, query)
   switch (scope) {
     case 'trending':
       ipc.send('fetch:giphy', { scope: scope, offset: offset });

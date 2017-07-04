@@ -4,11 +4,13 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: true,
   state: {
     giphy: [],
     loading: false,
     online: false,
     queries: [],
+    qs: '',
     scope: 'trending',
     selection: null
 
@@ -16,7 +18,8 @@ export default new Vuex.Store({
   getters: {
     scope: state => { return state.scope },
     loading: state => { return state.loading },
-    query: state => { return state.queries.pop() }
+    query: state => { return state.qs; },
+    queries: state => { return state.queries; }
   },
   mutations: {
     online (state) { state.online = true },
@@ -24,8 +27,8 @@ export default new Vuex.Store({
     giphy (state, item) {
       return state.giphy.push(item);
     },
-    clearGiphy (state) {
-      return state.giphy = [];
+    qs (state, query) {
+      return state.qs = query;
     },
     query (state, query) {
       return state.queries.push(query);

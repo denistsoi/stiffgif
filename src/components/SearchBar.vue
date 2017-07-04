@@ -1,5 +1,10 @@
 <template>
-  <input v-model="searchInput" debounce="300" v-on:keyup.13="search">
+  <div>
+    <input v-model="searchInput" debounce="300" v-on:keyup.13="search">
+    <div class="history">
+      <button class="btn" v-for="q in queries" v-on:click="changeQ">{{ q }}</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -11,22 +16,31 @@ export default {
   props: ['scope'],
   data() {
     return {
-      searchInput: ''
+      searchInput: '',
+      queries: this.$store.getters.queries
     }
   },
   mounted() {
+    console.log(this);
     let el = this.$el;
     el.focus();
   },
   methods: {
-    search: function (ev, value) {
-      var query = ev.target.value.toString().trim() || this.$data.searchInput;
-      var length = self.giphy ? self.giphy.length : 0;
-      if (!query) return;
-      
+    changeQ: function(ev) {
+      let query = ev.target.innerText.toString().trim();
+      const store = this.$store;
+      store.commit('qs', query);
+    },
+    search: function (ev) {
       const app = this;
       const store = app.$store;
+
+      let query = ev.target.value.toString().trim() || this.$data.searchInput;
+
+      if (!query) return;
+      
       store.commit('query', query);
+      store.commit('qs', query);
       store.commit('updateTab', 'search');
       fetch(this, store.getters.query)
     }
@@ -34,6 +48,7 @@ export default {
 }
 </script>
 <style lang="scss">
+:root {
   input {
     padding: 5px;
     width: 100%;
@@ -43,4 +58,16 @@ export default {
       outline: 0;
     }
   }
+  .history {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+    flex-direction: row;
+    .btn {
+      background: lightgrey;
+    }
+  }
+}
+  
+  
 </style>

@@ -33,7 +33,7 @@
       },
       giphy() {
         return this.$store.state.giphy;
-      }
+      },
     },
     created() {
       const ipc = ipcRenderer;
