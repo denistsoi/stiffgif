@@ -18,7 +18,6 @@
   import {ipcRenderer} from 'electron';
   import fetch from './helpers/fetch';
 
-
   export default {
     components: {
       SearchBar,
@@ -54,12 +53,10 @@
         fetch(app);
       }
       
-      ipcRenderer.on('fetched:giphy', (ev, res)=> {
+      const renderGifs = (ev, res)=> {
         var gifs = JSON.parse(res).data;
         
-        if (!gifs.length) {
-          return;
-        }
+        if (!gifs.length) { return; }
 
         if (store.getters.loading) {
           store.commit('loading', false);
@@ -68,7 +65,10 @@
             store.commit('giphy', item);
           });
         }
-      });      
+      }
+
+      ipcRenderer.on('fetched:giphy', renderGifs);
+      ipcRenderer.on('searched:giphy', renderGifs);
      
       window.addEventListener('scroll', function(ev) {
         var scrollYTrigger = 500;

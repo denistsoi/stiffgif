@@ -4,7 +4,7 @@
 
 <script>
 import {ipcRenderer} from 'electron'
-import search from '../helpers/search';
+import fetch from '../helpers/fetch';
 const ipc = ipcRenderer;
 
 export default {
@@ -23,8 +23,13 @@ export default {
       var query = ev.target.value.toString().trim() || this.$data.searchInput;
       var length = self.giphy ? self.giphy.length : 0;
       if (!query) return;
-      this.$emit('set-scope', 'search');
-      search(this, query)
+      
+      const app = this;
+      const store = app.$store;
+      store.commit('query', query);
+      store.commit('updateTab', 'search');
+      store.commit('clearGiphy');
+      fetch(this, store.getters.query)
     }
   }
 }

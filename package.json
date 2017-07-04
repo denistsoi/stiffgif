@@ -35,6 +35,7 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "dotenv": "^4.0.0",
     "electron": "^1.4.13",
     "electron-packager": "^8.4.0",
     "request": "^2.79.0",
