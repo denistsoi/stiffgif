@@ -3,7 +3,12 @@
 </template>
 
 <script>
+import {ipcRenderer} from 'electron'
+import search from '../helpers/search';
+const ipc = ipcRenderer;
+
 export default {
+  props: ['scope'],
   data() {
     return {
       searchInput: ''
@@ -13,11 +18,13 @@ export default {
     let el = this.$el;
     el.focus();
   },
-  methods() {
-    return {
-      search: ()=>{
-        return 'hi';
-      }
+  methods: {
+    search: function (ev, value) {
+      var query = ev.target.value.toString().trim() || this.$data.searchInput;
+      var length = self.giphy ? self.giphy.length : 0;
+      if (!query) return;
+      this.$emit('set-scope', 'search');
+      search(this, query)
     }
   }
 }

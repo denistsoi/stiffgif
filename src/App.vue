@@ -4,7 +4,7 @@
       <search-bar></search-bar>
     </header>
 
-    <content-list :online="online" :selection="selection"></content-list>
+    <content-list :online="online" :selection="selection" :giphy="giphy"></content-list>
 
     <notification :online="online" :selection="selection"></notification>
   </div>
@@ -26,7 +26,10 @@
     },
     data() {
       return {
+        giphy: [],
+        loading: false,
         online: false,
+        scope: 'trending',
         selection: null
       }
     },
@@ -44,8 +47,33 @@
 
       updateOnlineStatus();
 
-      fetch();
-    }
+      if (!app.loading) {
+        fetch(app);
+      }
+      
+      ipcRenderer.on('fetched:giphy', (ev, res)=> {
+        app.loading = false;
+        var gifs = JSON.parse(res).data;
+    
+        if (!gifs.length) {
+          return;
+        }
+
+        gifs.forEach(function(item) {
+          app.$data.giphy.push(item);
+        });
+      });      
+     
+      window.addEventListener('scroll', function(ev) {
+        var scrollYTrigger = 500;
+        var scrollY = document.body.scrollTop + window.innerHeight + scrollYTrigger;
+        if (document.body.scrollHeight < scrollY) {
+          if (!app.loading) {
+            setTimeout(fetch(app), 2000);
+          }
+        }
+      });
+    },
   }
 </script>
 

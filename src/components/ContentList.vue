@@ -16,28 +16,11 @@
 import {ipcRenderer, clipboard} from 'electron';
 
 export default {
-  props: ['online'],
+  props: ['online', 'total', 'giphy'],
   data() {
     return {
-      giphy: [],
       selection: null
     }
-  },
-  mounted() {
-    let app = this;
-    
-    ipcRenderer.on('fetched:giphy', (ev, res)=> {
-      var gifs = JSON.parse(res).data;
-  
-      if (!gifs.length) {
-        app.$set('giphyIsDone', true);
-        return;
-      }
-
-      gifs.forEach(function(item) {
-        app.$data.giphy.push(item);
-      });
-    });
   },
   methods: {
     copyToClipboard: function(ev) {
