@@ -4,16 +4,14 @@
       <transition name="fade">
         <div class="selected" v-show="selection"><h1>Gif has been copied</h1></div>
       </transition>
-    </div>    
-    
-    
+    </div>
     <div v-if="!online"><h1>stiffgif is currently offline</h1></div>
   </footer>
 </template>
 
 <script>
 export default {
-  props: ['online', 'selection'],
+  props: ['online', 'selected'],
   created() {
     // console.log(this.$store.state);
   }
