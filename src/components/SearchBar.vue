@@ -21,7 +21,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this);
     let el = this.$el;
     el.focus();
   },

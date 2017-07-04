@@ -16,17 +16,15 @@
 import {ipcRenderer, clipboard} from 'electron';
 
 export default {
-  props: ['online', 'total', 'giphy'],
-  data() {
-    return {
-      selection: null
-    }
-  },
+  props: ['online', 'total', 'giphy', 'selection'],
   methods: {
     copyToClipboard: function(ev) {
       const source = ev.target.src.toString();
-      this.$set(this, 'selection', source);
-      clipboard.writeText(source);
+      const store = this.$store;
+      store.commit('selection', source);
+
+      const selection = store.getters.selection;
+      clipboard.writeText(selection);
     },
     filter: function() {
       const store = this.$store;
@@ -70,42 +68,7 @@ img {
     cursor: pointer;
   }
   &:hover {
-    cursor: initial;
-  }
-}
-
-.selected {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #2980b9;
-  color: #ecf0f1;
-}
-
-.selected-transition {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #2980b9;
-  color: #ecf0f1;
-  opacity: 0;
-}
-
-.selected-enter {
-  animation: fade-in 1.8s ease-in-out 1;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
+    cursor: pointer;
   }
 }
 </style>
