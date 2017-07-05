@@ -16,9 +16,10 @@ Please check the CHANGELOG for updates
 ## Upgraded to electron 1.4.13
 
     npm install
-    npm run start
+    webpack
     // another window instance
-    npm run dev
+    npm run start
+    
 
 Denis Tsoi [link](https://www.twitter.com/denistsoi)  
 

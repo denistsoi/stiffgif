@@ -13,13 +13,18 @@ const assetsDir = path.join(__dirname, 'assets')
 let tray = undefined
 let window = undefined
 
+// hide icon from dock
+app.dock.hide();
+
 // This method is called once Electron is ready to run our code
 // It is effectively the main method of our Electron app
 app.on('ready', () => {
-  require('vue-devtools').install();
+  if (process.env.ENVIRONMENT === 'dev') {
+    require('vue-devtools').install();
+  }
 
   // Setup the menubar with an icon
-  let icon = nativeImage.createFromPath('./icon@5x.png')
+  let icon = nativeImage.createFromPath('./assets/icon@5x.png')
   tray = new Tray(icon)
 
   // Add a click handler so that when the user clicks on the menubar icon, it shows
