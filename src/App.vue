@@ -105,7 +105,7 @@ header {
   top: 0;
   padding: 10px;
   background-color: #efefef;
-  height: $header-height;
+  height: auto;
   width: 100%;
 }
 footer {

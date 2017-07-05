@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       searchInput: '',
-      queries: this.$store.getters.queries
+      queries: this.$store.getters.queries,
+      showHistory: false
     }
   },
   mounted() {
@@ -58,12 +59,11 @@ export default {
     }
   }
   .history {
-    display: flex;
+    display: block;
     width: 100%;
-    overflow: scroll;
-    flex-direction: row;
     .btn {
       background: lightgrey;
+      outline: 0;
     }
   }
 }

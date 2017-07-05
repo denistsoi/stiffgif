@@ -1,8 +1,14 @@
-☐ migrate search functionality
-☐ ensure search scope allows for infinite scrolling
-☐ add cache/sw for saved searches/fetches
+✔ migrate search functionality @done (7/5/2017, 12:36:56 PM)
+✔ ensure search scope allows for infinite scrolling @done (7/5/2017, 12:36:59 PM)
+✔ add cache/sw for saved searches/fetches @done (7/5/2017, 12:37:01 PM)
+
+✔ fix height for saved queries @done (7/5/2017, 12:40:04 PM)
+☐ adjust height of content with saved queries
+☐ set max queries to preferences
+☐ hide search history
 
 ☐ Menus
+
 ☐ hotkeys
 ☐ Multi-Selection
 ☐ Drag and drop

@@ -22,16 +22,15 @@ app.on('ready', () => {
   if (process.env.ENVIRONMENT === 'dev') {
     require('vue-devtools').install();
   }
-
+  
   // Setup the menubar with an icon
-  let icon = nativeImage.createFromPath('./assets/icon@5x.png')
-  tray = new Tray(icon)
+  tray = new Tray(`${__dirname}/assets/icon@5x.png`);
 
   // Add a click handler so that when the user clicks on the menubar icon, it shows
   // our popup window
   tray.on('click', function(event) {
     toggleWindow()
-
+    
     // Show devtools when command clicked
     if (window.isVisible() && process.defaultApp && event.metaKey) {
       window.openDevTools({mode: 'detach'})
@@ -49,6 +48,8 @@ app.on('ready', () => {
 
   // Tell the popup window to load our index.html file
   window.loadURL(`file://${__dirname}/public/index.html`)
+  
+  toggleWindow();
 
   // Only close the window on blur if dev tools isn't opened
   window.on('blur', () => {

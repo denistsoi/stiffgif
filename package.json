@@ -1,11 +1,12 @@
 {
   "name": "stiffgif",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "dev": "webpack"
+    "dev": "webpack",
+    "release": "electron-packager . StiffGif --platform=darwin --arch=x64 --out=build/ --overwrite --ignore=node_modules/electron-prebuilt,node_modules/electron-packager --icon=assets/icon.icns"
   },
   "keywords": [
     "Electron",
@@ -23,6 +24,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
     "css-loader": "^0.28.4",
+    "electron": "^1.4.13",
     "file-loader": "^0.11.2",
     "image-webpack-loader": "^3.3.1",
     "node-sass": "^4.5.3",
@@ -37,7 +39,6 @@
   },
   "dependencies": {
     "dotenv": "^4.0.0",
-    "electron": "^1.4.13",
     "electron-packager": "^8.4.0",
     "request": "^2.79.0",
     "vue-template-compiler": "^2.3.4"
