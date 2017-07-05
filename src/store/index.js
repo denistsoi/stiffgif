@@ -30,7 +30,12 @@ export default new Vuex.Store({
     online (state) { state.online = true },
     offline (state) { state.online = false },
     qs (state, query) { return state.qs = query; },
-    query (state, query) { return state.queries.push(query) },
+    query (state, query) { 
+      let exists = state.queries.indexOf(query);
+      if (exists < 0) {
+        return state.queries.push(query) 
+      }
+    },
     selection (state, link) { state.selection = link; return link  },
     updateTab(state, value) { state.scope = value }
   }

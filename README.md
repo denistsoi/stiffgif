@@ -3,9 +3,6 @@
 OSX Menubar to find gifs, Made with Electron (Atom-Shell) and Vue. Showcased at Hong Kong Web Developers Feb 2016.
 [Presentation](https://docs.google.com/presentation/d/1lrwxRQtAu7Mp_IJeNT5gOAG1TkDcVL-HFejtP4cw0Jo/edit?usp=sharing)
 
-![Stiffgif]
-(https://raw.githubusercontent.com/denistsoi/stiffgif/master/stiffgif.gif)
-
 ### Important
 [You can get the latest release here](https://github.com/denistsoi/stiffgif/releases)  
 
