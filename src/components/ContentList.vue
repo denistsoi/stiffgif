@@ -1,5 +1,5 @@
 <template>
-  <div id="content" v-if="online">
+  <div id="content" v-if="online" >
     <ul>
       <li v-for="gif in filter(giphy)">
         <img v-bind:src="'loading_spinner.gif'" v-img="gif.images.fixed_height.url" v-on:click="copyToClipboard" />
@@ -16,7 +16,7 @@
 import {ipcRenderer, clipboard} from 'electron';
 
 export default {
-  props: ['online', 'total', 'giphy', 'selection'],
+  props: ['online', 'total', 'giphy', 'selection', ],
   methods: {
     copyToClipboard: function(ev) {
       const source = ev.target.src.toString();
@@ -34,8 +34,6 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style lang="scss">

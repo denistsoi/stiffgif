@@ -40,7 +40,7 @@ app.on('ready', () => {
   // Make the popup window for the menubar
   window = new BrowserWindow({
     width: 300,
-    height: 350,
+    height: 450,
     show: false,
     frame: false,
     resizable: false,

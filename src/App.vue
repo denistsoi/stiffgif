@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header>
+    <header v-bind:class="{fixed: fixed}"> 
       <search-bar></search-bar>
     </header>
 
@@ -34,6 +34,9 @@
       giphy() {
         return this.$store.state.giphy;
       },
+      fixed() {
+        return this.$store.getters.fixed;
+      }
     },
     created() {
       const ipc = ipcRenderer;
@@ -74,13 +77,18 @@
       ipcRenderer.on('searched:giphy', renderGifs);
      
       window.addEventListener('scroll', function(ev) {
-        var scrollYTrigger = 500;
-        var scrollY = document.body.scrollTop + window.innerHeight + scrollYTrigger;
+        let top = 40;
+        let scrollYTrigger = 500;
+        let scrollY = document.body.scrollTop + window.innerHeight + scrollYTrigger;
+        
         if (document.body.scrollHeight < scrollY) {
           if (!store.getters.loading) {
             setTimeout(fetch(app), 2000);
           }
         }
+
+        let scrollTop = document.body.scrollTop > top ? 
+          store.commit('fixed', true) : store.commit('fixed', false);
       });
     },
   }
@@ -98,15 +106,17 @@ $header-height: 62px;
 
 body {
   font-family: 'Slabo 27px', serif;
-  margin-top: $header-height;
 }
 header {
-  position: fixed;
+  position: relative;
   top: 0;
   padding: 10px;
   background-color: #efefef;
   height: auto;
   width: 100%;
+}
+header.fixed {
+  position: fixed;
 }
 footer {
   position: fixed;

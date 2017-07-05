@@ -3,7 +3,8 @@
 ✔ add cache/sw for saved searches/fetches @done (7/5/2017, 12:37:01 PM)
 
 ✔ fix height for saved queries @done (7/5/2017, 12:40:04 PM)
-☐ adjust height of content with saved queries
+✔ adjust height of content with saved queries @done (7/5/2017, 1:13:25 PM)
+☐ dont add duplicates
 ☐ set max queries to preferences
 ☐ hide search history
 

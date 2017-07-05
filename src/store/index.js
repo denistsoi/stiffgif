@@ -12,10 +12,11 @@ export default new Vuex.Store({
     queries: [],
     qs: '',
     scope: 'trending',
-    selection: null
-
+    selection: null,
+    fixed: false
   },
   getters: {
+    fixed: state => { return state.fixed },
     scope: state => { return state.scope },
     loading: state => { return state.loading },
     query: state => { return state.qs; },
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     selection: state => { return state.selection }
   },
   mutations: {
+    fixed (state, val) { return state.fixed = val },
     giphy (state, item) { return state.giphy.push(item) },
     loading (state, value) { state.loading = value },
     online (state) { state.online = true },
