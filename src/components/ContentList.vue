@@ -21,10 +21,12 @@ export default {
     copyToClipboard: function(ev) {
       const source = ev.target.src.toString();
       const store = this.$store;
+      
       store.commit('selection', source);
 
       const selection = store.getters.selection;
-      clipboard.writeText(selection);
+      let temp = selection.slice(0,13) + selection.slice(14);
+      clipboard.writeText(temp);
     },
     filter: function() {
       const store = this.$store;
