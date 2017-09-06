@@ -18,8 +18,8 @@ Please check the CHANGELOG for updates
     npm run start
     
 
+### author
 Denis Tsoi [link](https://www.twitter.com/denistsoi)  
 
 ### License
-
 MIT
